@@ -2,6 +2,7 @@ window.onload = function() {
 
     // start on first image
     let currentImage = 0;
+    let slideshowInterval = null;
     // get the sliding frame element
     const [frame] = document.getElementsByClassName("frame");
     
@@ -25,22 +26,37 @@ window.onload = function() {
             newImage = 0;
         }
         currentImage = newImage;
+        moveFrame();
     }
-    
 
-    const [next] = document.getElementsByClassName("Next");
+    const runSlideshow = () => {
+        changeCurrentImage(1);
+    };
+
+    const stopSlideshow = () => {
+        clearInterval(slideshowInterval);
+        slideshowInterval = null;
+        slideshowButton.innerHTML = 'start';
+    }
+
+    const [next] = document.getElementsByClassName("next");
     next.addEventListener('click', () => {
-        console.log('next');
-        changeCurrentImage(1);        
-        console.log(currentImage);
-        moveFrame();
+        changeCurrentImage(1);
+        stopSlideshow();
     });
-    const [previous] = document.getElementsByClassName("Previous");
+    const [previous] = document.getElementsByClassName("previous");
     previous.addEventListener('click', () => {
-        console.log('previous');
         changeCurrentImage(-1);
-        console.log(currentImage);
-        moveFrame();
+        stopSlideshow();
+    });
+    const [slideshowButton] = document.getElementsByClassName("auto");
+    slideshowButton.addEventListener('click', () => {
+        if (slideshowInterval === null) {
+            slideshowInterval = setInterval(runSlideshow, 2000);
+            slideshowButton.innerHTML = 'stop';
+        } else {
+            stopSlideshow();
+        }
     });
     
   };

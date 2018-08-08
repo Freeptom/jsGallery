@@ -33,13 +33,28 @@ img {
 }
 
 .controls {
-   position: absolute;
-   left: 30px;
-   right: 0;
-   bottom: 30px;
+    opacity: 0.4;
+    position: absolute;
+    left: 30px;
+    right: 0;
+    bottom: 30px;
+    transition: opacity 0.3s;
+}
+
+.controls button {
+    background: black;
+    color: white;  
+    cursor: pointer;  
+}
+
+.controls:hover {
+    opacity: 1;
+}
+
+button:focus {
+    outline:0;
 }
 
 button {
     padding: 10px;
-    
 }
